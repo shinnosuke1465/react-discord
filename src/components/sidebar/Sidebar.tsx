@@ -5,7 +5,8 @@ import HeadphonesIcon from "@mui/icons-material/Headphones";
 import React, { useEffect, useState } from "react";
 import "./Sidebar.scss";
 import SidebarChannle from "./SidebarChannle";
-import { useAppSelector } from "../../App/hooks";
+import { useAppSelector } from "../../app/hooks";
+import useFirebase from "../../hooks/useFirebase";
 import { db, auth } from "../../firebase";
 import {
   collection,
@@ -19,13 +20,14 @@ const Sidebar = () => {
   const user = useAppSelector((state) => state.user.user);
   // const [channels, setChannels] = useState<Channel[]>([]);
 
-  const { documents: channels } = useFirebase("channels");
+  const { documents: channels } = useFirebase("channels"); ///チャンネルのデータ配列を変数に格納
   console.log(channels);
 
   const addChannel = async () => {
     let channelName = prompt("新しいチャンネルを作成します");
 
-    if (channelName) {
+    if (channelName) { //channelNameを打ち込んだ場合
+      //DB(firestoreのコレクション)に追加する処理。公式ドキュメント参照
       const docRef: DocumentReference<DocumentData> = await addDoc(
         collection(db, "channels"),
         {
