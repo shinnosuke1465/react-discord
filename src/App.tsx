@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import "./App.scss";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
-// import Chat from "./components/Chat";
 import Login from "./components/login/Login";
 import Sidebar from "./components/sidebar/Sidebar";
 import { login, logout } from "./features/userSlice";
 import { auth } from "./firebase";
 import { Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
-import { ErrorFallback } from "./components/ErrorFallBack";
+// import { ErrorBoundary } from "react-error-boundary";
+// import { ErrorFallback } from "./components/ErrorFallBack";
+import Chat from "./components/chat/Chat";
 
 function App() {
   const user = useAppSelector((state) => state.user.user);
@@ -34,15 +34,15 @@ function App() {
   }, [dispatch]);  //通知を出すたびuseEffectの中身を発火
 
   return (
-    <div className="App">
+    <div className="App flex">
       {user ? (
         <>
           {/* sidebar */}
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
             {/* <Suspense fallback={<div>...Loading</div>}> */}
             <Sidebar />
             {/* </Suspense> */}
-          </ErrorBoundary>
+          {/* </ErrorBoundary> */}
           {/* home */}
           <Chat />
         </>

@@ -1,15 +1,15 @@
-import { DocumentData } from "firebase/firestore/lite";
 import React, { useEffect } from "react";
-import { useAppDispatch } from "../app/hooks";
-import { setChannelInfo } from "../features/appSlice";
+import { useAppDispatch } from "../../app/hooks";
+import { setChannelInfo } from "../../features/appSlice";
 import "./SidebarChannel.scss";
+import { DocumentData } from "firebase/firestore";
 
 type Props = {
   id: string;
   channel: DocumentData;
 };
 
-const SidebarChannle = (props: Props) => {
+const SidebarChannel = (props: Props) => {
   const { id, channel } = props;
   const dispatch = useAppDispatch();
 
@@ -42,4 +42,4 @@ const SidebarChannle = (props: Props) => {
   );
 };
 
-export default SidebarChannle;
+export default SidebarChannel;

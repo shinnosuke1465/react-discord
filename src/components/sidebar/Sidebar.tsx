@@ -4,7 +4,7 @@ import MicIcon from "@mui/icons-material/Mic";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
 import React, { useEffect, useState } from "react";
 import "./Sidebar.scss";
-import SidebarChannle from "./SidebarChannle";
+import SidebarChannle from "./SidebarChannel";
 import { useAppSelector } from "../../app/hooks";
 import useFirebase from "../../hooks/useFirebase";
 import { db, auth } from "../../firebase";
@@ -14,6 +14,7 @@ import {
   DocumentData,
   DocumentReference,
 } from "firebase/firestore";
+import SidebarChannel from "./SidebarChannel";
 // import useFirebase from "../hooks/useFirebase";
 
 const Sidebar = () => {
@@ -67,15 +68,12 @@ const Sidebar = () => {
 
           <div className="sidebarChannelList">
             {channels.map((channel) => (
-              <SidebarChannle
+              <SidebarChannel
                 id={channel.id}
                 channel={channel}
                 key={channel.id}
               />
             ))}
-            {/* <SidebarChannle id="1" channel="sample" />
-            <SidebarChannle id="1" channel="sample" />
-            <SidebarChannle id="1" channel="sample" /> */}
           </div>
 
           <div className="sidebarSettings">

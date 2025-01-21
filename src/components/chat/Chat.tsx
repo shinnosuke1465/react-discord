@@ -7,9 +7,8 @@ import {
   EmojiEmotionsOutlined,
 } from "@mui/icons-material";
 import GifIcon from "@mui/icons-material/Gif";
-import Message from "./Message";
-import { useAppSelector } from "../app/hooks";
-import { db } from "../firebase";
+import { useAppSelector } from "../../app/hooks";
+import { db } from "../../firebase";
 import {
   addDoc,
   collection,
@@ -26,8 +25,9 @@ import {
   serverTimestamp,
   Timestamp,
 } from "firebase/firestore";
-import useFirebase from "../hooks/useFirebase";
-import useSubCollection from "../hooks/useSubCollection";
+import useFirebase from "../../hooks/useFirebase";
+import useSubCollection from "../../hooks/useSubCollection";
+import Message from "./Message";
 
 interface Messages {
   timestamp: Timestamp;
@@ -45,39 +45,12 @@ interface Messages {
 //54:【補足】サブコレクションデータ取得をカスタムフックスで切り出してみよう
 
 const Chat = () => {
-  const user = useAppSelector((state) => state.user.user);
-  const channelId = useAppSelector((state) => state.app.channelId);
-  const channelName = useAppSelector((state) => state.app.channelName);
+  const user = useAppSelector((state: { user: { user: any; }; }) => state.user.user);
+  const channelId = useAppSelector((state: { app: { channelId: any; }; }) => state.app.channelId);
+  const channelName = useAppSelector((state: { app: { channelName: any; }; }) => state.app.channelName);
 
   const [inputText, setInputText] = useState<string>("");
   const { subDocuments: messages } = useSubCollection("channels", "messages");
-  // const [messages, setMessages] = useState<Messages[]>([]);
-
-  // useEffect(() => {
-  //   let collectionRef = collection(
-  //     db,
-  //     "channels",
-  //     String(channelId),
-  //     "messages"
-  //   );
-
-  //   let collectionRefOrderBy = query(
-  //     collectionRef,
-  //     orderBy("timestamp", "desc")
-  //   );
-
-  //   onSnapshot(collectionRefOrderBy, (snapshot) => {
-  //     let results: Messages[] = [];
-  //     snapshot.docs.forEach((doc: QueryDocumentSnapshot<DocumentData>) => {
-  //       results.push({
-  //         timestamp: doc.data().timestamp,
-  //         message: doc.data().message,
-  //         user: doc.data().user,
-  //       });
-  //     });
-  //     setMessages(results);
-  //   });
-  // }, [channelId]);
 
   const sendMessage = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -107,7 +80,7 @@ const Chat = () => {
       <ChatHeader channelName={channelName} />
 
       <div className="chatMessages">
-        {messages.map((message, index) => (
+        {messages.map((message: { message: any; timestamp: any; user: any; }, index: any) => (
           <Message
             key={index}
             message={message.message}

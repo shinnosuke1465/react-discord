@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { QueryDocumentSnapshot } from "firebase/firestore/lite";
+import { QueryDocumentSnapshot } from "firebase/firestore";
 import {
   onSnapshot,
   collection,
